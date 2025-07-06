@@ -1,16 +1,7 @@
-#board = [[0 for i in range(9)] for j in range (9)]
+import random
 
-board = [
-    [5, 3, 4, 6, 7, 8, 9, 1, 2],
-    [6, 7, 2, 1, 9, 5, 3, 4, 8],
-    [1, 9, 8, 3, 4, 2, 5, 6, 7],
-    [8, 5, 9, 7, 6, 1, 4, 2, 3],
-    [4, 2, 6, 8, 5, 3, 7, 9, 1],
-    [7, 1, 3, 9, 2, 4, 8, 5, 6],
-    [9, 6, 1, 5, 3, 7, 2, 8, 4],
-    [2, 8, 7, 4, 1, 9, 6, 3, 5],
-    [3, 4, 5, 2, 8, 6, 1, 0, 0]
-]
+board = [[0 for i in range(9)] for j in range (9)]
+
 
 def print_board(board):
     for i in range(9):
@@ -30,26 +21,28 @@ def number_is_valid_in_row(board, number, row):
             return False
     return True
 
+
 def number_is_valid_in_column(board, number, column):
     for i in board:
         if number==i[column]:
             return False
     return True
 
+
 def number_is_valid_in_box(board, number, row, column):
     start_row = (row//3) * 3
     start_column = (column//3) * 3
     for i in range(start_row, start_row+3):
         for j in range(start_column, start_column+3):
-            if number==board[row][column]:
+            if number==board[i][j]:
                 return False
     return True
 
-def insert_number(board, number, row, column):
-    valid_row = number_is_valid_in_row(board=board, number=number, row=row)
-    valid_column = number_is_valid_in_column(board=board, number=number, column=column)
-    valid_box = number_is_valid_in_box(board=board, number=number, row=row, column=column)
 
+def insert_number(board, number, row, column):
+    valid_row = number_is_valid_in_row(board, number, row)
+    valid_column = number_is_valid_in_column(board, number, column)
+    valid_box = number_is_valid_in_box(board, number, row, column)
 
     if valid_row and valid_column and valid_box:
         board[row][column] = number
@@ -58,8 +51,39 @@ def insert_number(board, number, row, column):
         print("Invalid, please try again.")
 
 
-print_board(board=board)
-insert_number(board, 7, 8, 7)
-print_board(board=board)
-insert_number(board, 9, 8, 8)
-print_board(board=board)
+def fill_board(board):
+    for row in range(9):
+        for column in range(9):
+            if board[row][column] != 0:
+                    continue
+            numbers = [i for i in range(1,10)]
+            random.shuffle(numbers)
+            for i in numbers:
+                if number_is_valid_in_row(board, i, row) and number_is_valid_in_column(board, i, column) and number_is_valid_in_box(board, i, row, column):
+                    insert_number(board, i, row, column)
+                    if fill_board(board):
+                        return True
+                    else:
+                        board[row][column] = 0
+            return False
+    return True
+
+
+fill_board(board)
+print_board(board)
+
+
+# def fill_board(board):
+#     for row in range(9):
+#         for col in range(9):
+#             if board[row][col] == 0:
+#                 numbers = list(range(1, 10))
+#                 shuffle(numbers)
+#                 for num in numbers:
+#                     if is_valid_in_row(...) and is_valid_in_column(...) and is_valid_in_box(...):
+#                         board[row][col] = num
+#                         if fill_board(board):
+#                             return True
+#                         board[row][col] = 0  # backtrack
+#                 return False  # no number fits
+#     return True  # board completely filled
