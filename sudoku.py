@@ -2,7 +2,6 @@ import random
 
 board = [[0 for i in range(9)] for j in range (9)]
 
-
 def print_board(board):
     for i in range(9):
         if i%3==0:
@@ -60,7 +59,7 @@ def fill_board(board):
             random.shuffle(numbers)
             for i in numbers:
                 if number_is_valid_in_row(board, i, row) and number_is_valid_in_column(board, i, column) and number_is_valid_in_box(board, i, row, column):
-                    insert_number(board, i, row, column)
+                    board[row][column] = i
                     if fill_board(board):
                         return True
                     else:
@@ -68,22 +67,13 @@ def fill_board(board):
             return False
     return True
 
+#def trim_board(board):
+
 
 fill_board(board)
 print_board(board)
 
-
-# def fill_board(board):
-#     for row in range(9):
-#         for col in range(9):
-#             if board[row][col] == 0:
-#                 numbers = list(range(1, 10))
-#                 shuffle(numbers)
-#                 for num in numbers:
-#                     if is_valid_in_row(...) and is_valid_in_column(...) and is_valid_in_box(...):
-#                         board[row][col] = num
-#                         if fill_board(board):
-#                             return True
-#                         board[row][col] = 0  # backtrack
-#                 return False  # no number fits
-#     return True  # board completely filled
+difficulty = input("Choose difficulty (Easy, Medium, Hard): ")
+while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
+        difficulty = input("Invalid selection, please try again: ")
+print(difficulty)
