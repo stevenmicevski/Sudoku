@@ -67,14 +67,29 @@ def fill_board(board):
             return False
     return True
 
-#def trim_board(board):
+def trim_board_easy(board):
+    i = 0
+    while i < 40:
+        cell = random.randint(0, 80)
+        row = cell // 9
+        column = cell % 9
+        if board[row][column] != 0:
+            board[row][column] = 0
+            i = i + 1
+
 
 
 fill_board(board)
 print_board(board)
+trim_board_easy(board)
+print_board(board)
+insert_number(board, 1, 0, 0)
+fill_board(board)
+print_board(board)
 
-difficulty = input("Choose difficulty (Easy, Medium, Hard): ")
-difficulty = difficulty.capitalize()
-while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
+def select_difficulty():
+    difficulty = input("Choose difficulty (Easy, Medium, Hard): ")
+    difficulty = difficulty.capitalize()
+    while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
         difficulty = input("Invalid selection, please try again: ")
         difficulty = difficulty.capitalize()
