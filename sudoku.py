@@ -78,14 +78,12 @@ def trim_board_easy(board):
             i = i + 1
 
 
-
-fill_board(board)
-print_board(board)
-trim_board_easy(board)
-print_board(board)
-insert_number(board, 1, 0, 0)
-fill_board(board)
-print_board(board)
+def board_is_full(board):
+    for row in range(9):
+        for column in range(9):
+            if board[row][column] == 0:
+                return False
+    return True
 
 def select_difficulty():
     difficulty = input("Choose difficulty (Easy, Medium, Hard): ")
@@ -93,3 +91,22 @@ def select_difficulty():
     while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
         difficulty = input("Invalid selection, please try again: ")
         difficulty = difficulty.capitalize()
+
+def start_game(board):
+    select_difficulty()
+    print("Game started!")
+    print_board(board)
+    while board_is_full(board) == False:
+        print("Insert a number: ")
+        number = input("number: ")
+        row = input("row: ")
+        column = input ("column: ")
+        insert_number(board, int(number), int(row), int(column))
+        print_board(board)
+    print("WELL DONE!")
+    print_board(board)
+
+fill_board(board)
+print_board(board)
+trim_board_easy(board)
+start_game(board)
