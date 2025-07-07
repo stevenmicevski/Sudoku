@@ -74,6 +74,7 @@ fill_board(board)
 print_board(board)
 
 difficulty = input("Choose difficulty (Easy, Medium, Hard): ")
+difficulty = difficulty.capitalize()
 while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
         difficulty = input("Invalid selection, please try again: ")
-print(difficulty)
+        difficulty = difficulty.capitalize()
