@@ -1,9 +1,6 @@
 import random
 import copy
 
-#  Generate a matrix with 9 lists with 9 elements.
-board = [[0 for i in range(9)] for j in range (9)]
-
 #  Prints the board
 def print_board(board):
     for i in range(9):
@@ -153,8 +150,9 @@ def select_difficulty(board):
     elif difficulty == "Hard":
         trim_board_hard(board)
 
-#  Starts a Sudoku game
-def start_game(board):
+#  Generates a board and Starts a Sudoku game
+def start_game():
+    board = [[0 for i in range(9)] for j in range (9)]
     fill_board(board)
     select_difficulty(board)
     print("Game started!")
@@ -168,6 +166,3 @@ def start_game(board):
         print_board(board)
     print("WELL DONE!")
     print_board(board)
-
-
-start_game(board)
