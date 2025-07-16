@@ -164,7 +164,7 @@ def start_game(board):
         number = input("number: ")
         row = input("row: ")
         column = input ("column: ")
-        insert_number(board, int(number), int(row), int(column))
+        insert_number(board, int(number), int(row)-1, int(column)-1)
         print_board(board)
     print("WELL DONE!")
     print_board(board)
