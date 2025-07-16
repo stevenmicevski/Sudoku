@@ -1,4 +1,5 @@
 import random
+import copy
 
 board = [[0 for i in range(9)] for j in range (9)]
 
@@ -67,15 +68,38 @@ def fill_board(board):
             return False
     return True
 
+
+def count_solutions(board):
+    if board_is_full:
+        return 1
+    
+    solutions = 0
+    for row in range(9):
+        for column in range(9):
+            if tmpboard[row][column] == 0:
+                for i in range(1,10):
+                    if number_is_valid_in_row(board, i, row) and number_is_valid_in_column(board, i, column) and number_is_valid_in_box(board, i, row, column):
+                        board[row][column] = i
+                        solutions = solutions + count_solutions(board)
+                        board[row][column] = 0
+                        if solutions > 1:
+                            return solutions
+                return solutions
+    return solutions
+
+
 def trim_board_easy(board):
     i = 0
-    while i < 40:
+    while i < 41:
         cell = random.randint(0, 80)
         row = cell // 9
         column = cell % 9
         if board[row][column] != 0:
-            board[row][column] = 0
-            i = i + 1
+            tmpboard = copy.deepcopy(board)
+            tmpboard[row][column] = 0
+            if count_solutions(tmpboard) == 1:
+                board[row][column] = 0
+                i = i + 1
 
 
 def board_is_full(board):
@@ -85,12 +109,14 @@ def board_is_full(board):
                 return False
     return True
 
+
 def select_difficulty():
     difficulty = input("Choose difficulty (Easy, Medium, Hard): ")
     difficulty = difficulty.capitalize()
     while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
         difficulty = input("Invalid selection, please try again: ")
         difficulty = difficulty.capitalize()
+
 
 def start_game(board):
     select_difficulty()
@@ -106,7 +132,9 @@ def start_game(board):
     print("WELL DONE!")
     print_board(board)
 
+
 fill_board(board)
 print_board(board)
 trim_board_easy(board)
+print_board(board)
 start_game(board)
