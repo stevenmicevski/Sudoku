@@ -153,8 +153,9 @@ def select_difficulty(board):
     elif difficulty == "Hard":
         trim_board_hard(board)
 
-#  Starts a suoku game
+#  Starts a Sudoku game
 def start_game(board):
+    fill_board(board)
     select_difficulty(board)
     print("Game started!")
     print_board(board)
@@ -169,6 +170,4 @@ def start_game(board):
     print_board(board)
 
 
-fill_board(board)
-print_board(board)
 start_game(board)
