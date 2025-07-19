@@ -137,9 +137,3 @@ def open_game_window(board, solution):
             widget.grid(row=i, column=j, padx=(left, right), pady=(top, bottom), sticky="nsew")
 
     window.mainloop()
-
-
-
-start_game()
-
-
