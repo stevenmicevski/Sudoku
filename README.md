@@ -16,8 +16,8 @@ This is a simple desktop Sudoku game built using **Python** and **Tkinter**. The
 - Win detection with a celebratory message 🎉
 
 ## 🖼️ Screenshot
-![Alt text]("screenshots/main_menu.png")
-![Alt text]("screenshots/gameplay.png")
+![Alt text](screenshots/main_menu.png)
+![Alt text](screenshots/gameplay.png)
 
 ## 🛠 Requirements
 
