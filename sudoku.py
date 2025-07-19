@@ -69,7 +69,7 @@ def fill_board(board):
 
 #  Counts the number of solutions recursively, checks if the board hase only 1 unique solution.
 def count_solutions(board):
-    if board_is_full:
+    if board_is_full(board):
         return 1
     
     solutions = 0
@@ -103,7 +103,7 @@ def trim_board_easy(board):
 #  Trims the automatically filled board to Medium difficulty so it's playable, but before triming each number it checks if the board still has only 1 solution.
 def trim_board_medium(board):
     i = 0
-    while i < 38:
+    while i < 41:
         cell = random.randint(0, 80)
         row = cell // 9
         column = cell % 9
