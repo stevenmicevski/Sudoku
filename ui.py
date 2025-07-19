@@ -48,7 +48,7 @@ def open_game_window(board, solution):
     window.minsize(width=500, height=600)
     window.config(background="darkgrey", pady=5, padx=5)
 
-    status_label = tk.Label(window, text="", font=("Arial", 14), highlightbackground="lightgrey", highlightthickness=2)
+    status_label = tk.Label(window, text="", font=("Arial", 14), highlightbackground="lightgrey", highlightthickness=4)
     status_label.grid(row=9, column=0, columnspan=9, pady=10, sticky="nsew")
 
     def validate_input(new_value):
